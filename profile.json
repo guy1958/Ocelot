@@ -1,0 +1,430 @@
+{
+  "editors": [
+    {
+      "id": "ocelot_onoff",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1",
+          "names": {
+            "0": "Off",
+            "1": "On"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_input",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1",
+          "names": {
+            "0": "Off",
+            "1": "On"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ED_CONTROLLER_ST",
+      "ranges": [
+        {
+          "subset": "0,1",
+          "uom": "25",
+          "names": {
+            "0": "Not Connected",
+            "1": "Connected"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_ir_result",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "None Sent",
+            "1": "Acknowledged",
+            "2": "Not Acknowledged"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_ir_num",
+      "ranges": [
+        {
+          "uom": "108",
+          "min": 0,
+          "max": 1023,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "ocelot_resident_ir",
+      "ranges": [
+        {
+          "uom": "108",
+          "min": 0,
+          "max": 39,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "ocelot_write_result",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "None Written",
+            "1": "Acknowledged",
+            "2": "Not Acknowledged"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_read_result",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "None Read",
+            "1": "Read OK",
+            "2": "No Valid Answer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_var_num",
+      "ranges": [
+        {
+          "uom": "107",
+          "min": 0,
+          "max": 127,
+          "step": 1,
+          "names": {
+            "60": "60 Last received IR",
+            "61": "Leopard Beep Counter",
+            "62": "62 Beep Duration",
+            "63": "Leopard Screen Number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ocelot_var_val",
+      "ranges": [
+        {
+          "uom": "108",
+          "min": 0,
+          "max": 65535,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "ocelot_module_type",
+      "ranges": [
+        {
+          "uom": "107",
+          "min": 0,
+          "max": 255,
+          "step": 1
+        }
+      ]
+    }
+  ],
+  "nodedefs": [
+    {
+      "id": "controller",
+      "name": "Ocelot Controller",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Status",
+          "editor": "ED_CONTROLLER_ST"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "DISCOVER",
+            "name": "Discover",
+            "native": "true"
+          },
+          {
+            "id": "QUERY",
+            "name": "Query",
+            "native": "true"
+          },
+          {
+            "id": "RESCAN",
+            "name": "Rescan Modules",
+            "native": "false"
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "relay",
+      "name": "Ocelot Relay",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Relay",
+          "editor": "ocelot_onoff"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "DON",
+            "name": "On",
+            "native": "true"
+          },
+          {
+            "id": "DOF",
+            "name": "Off",
+            "native": "true"
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "input",
+      "name": "Ocelot Input",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Input",
+          "editor": "ocelot_input"
+        }
+      ],
+      "cmds": {
+        "sends": [
+          {
+            "id": "DON",
+            "name": "On",
+            "native": "true"
+          },
+          {
+            "id": "DOF",
+            "name": "Off",
+            "native": "true"
+          }
+        ],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "irzone",
+      "name": "Ocelot IR Zone",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Last Send Result",
+          "editor": "ocelot_ir_result"
+        },
+        {
+          "id": "IR_NUM",
+          "name": "Last IR Number",
+          "editor": "ocelot_ir_num"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "SENDIR",
+            "name": "Send IR",
+            "native": "false",
+            "format": "/IRNUM/${c}/${c} number ${v}/",
+            "parameters": [
+              {
+                "id": "IRNUM",
+                "name": "IR Number",
+                "editor": "ocelot_ir_num",
+                "optional": false,
+                "init": "IR_NUM"
+              }
+            ]
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "irresident",
+      "name": "Ocelot Resident IR",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Last Send Result",
+          "editor": "ocelot_ir_result"
+        },
+        {
+          "id": "IR_NUM",
+          "name": "Last IR Number",
+          "editor": "ocelot_resident_ir"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "SENDIR",
+            "name": "Send Resident IR",
+            "native": "false",
+            "format": "/IRNUM/${c}/${c} number ${v}/",
+            "parameters": [
+              {
+                "id": "IRNUM",
+                "name": "IR Number",
+                "editor": "ocelot_resident_ir",
+                "optional": false,
+                "init": "IR_NUM"
+              }
+            ]
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "cpuxavar",
+      "name": "Ocelot Variables",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Last Write Result",
+          "editor": "ocelot_write_result"
+        },
+        {
+          "id": "VAR_NUM",
+          "name": "Last Variable",
+          "editor": "ocelot_var_num"
+        },
+        {
+          "id": "VAR_VAL",
+          "name": "Last Value Written",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "READ_RESULT",
+          "name": "Last Read Result",
+          "editor": "ocelot_read_result"
+        },
+        {
+          "id": "READ_VAR",
+          "name": "Read Variable",
+          "editor": "ocelot_var_num"
+        },
+        {
+          "id": "READ_VAL",
+          "name": "Read Value",
+          "editor": "ocelot_var_val"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "SETVAR",
+            "name": "Write Variable",
+            "native": "false",
+            "format": "/VARNUM/${c}/${c} variable ${v}/VALUE// = ${v}/",
+            "parameters": [
+              {
+                "id": "VARNUM",
+                "name": "Variable",
+                "editor": "ocelot_var_num",
+                "optional": false,
+                "init": "VAR_NUM"
+              },
+              {
+                "id": "VALUE",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "optional": false,
+                "init": "VAR_VAL"
+              }
+            ]
+          },
+          {
+            "id": "GETVARS",
+            "name": "Get Variables",
+            "native": "false"
+          },
+          {
+            "id": "READVAR",
+            "name": "Read Variable",
+            "native": "false",
+            "format": "/VARNUM/${c}/${c} variable ${v}/",
+            "parameters": [
+              {
+                "id": "VARNUM",
+                "name": "Variable",
+                "editor": "ocelot_var_num",
+                "optional": false,
+                "init": "READ_VAR"
+              }
+            ]
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "placeholder",
+      "name": "Ocelot Unsupported Module",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Module Type",
+          "editor": "ocelot_module_type"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    }
+  ],
+  "linkdefs": []
+}

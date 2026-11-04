@@ -1,0 +1,21 @@
+# Local environment and generated files
+.venv/
+__pycache__/
+*.pyc
+
+# Logs (debug.log is large; crash.log holds the live PG3INIT token)
+logs/
+crash.log
+
+# Credentials issued by the hub
+plugin_*.key
+plugin_*.cert
+.iox_env
+.vscode/
+
+# Runtime state
+svc.pid
+NSplugin_*.lock
+persist/
+
+data/

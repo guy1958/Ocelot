@@ -1,0 +1,20 @@
+{
+  "name": "Ocelot",
+  "status": "active",
+  "developer": "guy@lavoie.com",
+  "author": "Guy Lavoie",
+  "purchaseOptions": [],
+  "type": "python3",
+  "path": "/usr/home/eisy-ai/generated_plugins/ocelot",
+  "executable": "main.py",
+  "runAs": "admin",
+  "install": "install.sh",
+  "desc": "Adicon / Applied Digital Ocelot (CPU-XA protocol): expansion-module relays and inputs, SECU-16IR IR output zones, the Ocelot's resident IR output and program variable writes and reads, through a serial-to-Ethernet adapter (IP address and port).",
+  "customParams": "{\"IPAddress\": \"\", \"IPPort\": \"\", \"InvertInputs\": \"false\"}",
+  "discover": true,
+  "isyAccess": false,
+  "requireEisyui": false,
+  "shortPoll": 5,
+  "longPoll": 60,
+  "nsid": "2f634bf5-981b-494c-b127-a0fc9175a2ca"
+}
