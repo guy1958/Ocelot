@@ -1,8 +1,10 @@
 '''Controller-side glue for the Ocelot plugin. Every function takes the Controller instance.'''
 import os
+import threading
+import time
 import udi_interface
 import ocelot_proto as op
-from ocelot_nodes import OcelotRelay, OcelotInput, OcelotIRZone, OcelotResidentIR, OcelotVariables, OcelotPlaceholder
+from ocelot_nodes import OcelotIRZone, OcelotResidentIR, OcelotVariables, OcelotPlaceholder, io_node_class
 
 LOGGER = udi_interface.LOGGER
 TRUE_WORDS = ('1', 'true', 'yes', 'on')
@@ -11,6 +13,15 @@ LEGACY_IR_MARKER = 'legacy_ir_node_cleaned'
 # The order the I/O reads are made in on each poll, and their names for the log and notices.
 SOURCE_ORDER = (op.SOURCE_LATCHED, op.SOURCE_REALTIME)
 SOURCE_NAMES = {op.SOURCE_LATCHED: 'Get Latched I/O', op.SOURCE_REALTIME: 'Get Real Time I/O'}
+
+# Delete Module Nodes waits at most this long (seconds) for PG3 to confirm the node adds still queued,
+# checking every ADD_WAIT_STEP seconds. PG3 confirmed adds about 0.6 s apart in the 1.16.0 log.
+ADD_WAIT_TIMEOUT = 120.0
+ADD_WAIT_STEP = 0.25
+
+# Guards ctrl.pending_adds and ctrl.delete_running (touched by the add-done event thread, the command
+# thread and the delete thread).
+_PENDING_LOCK = threading.Lock()
 
 
 def _notice(ctrl, key, text=None):
@@ -87,6 +98,61 @@ def set_params(ctrl, params):
         discover(ctrl)
 
 
+def _pending(ctrl):
+    '''The set of module node addresses whose add PG3 has not confirmed yet (create it if missing).
+
+    Call with _PENDING_LOCK held.
+    '''
+    pending = getattr(ctrl, 'pending_adds', None)
+    if pending is None:
+        pending = ctrl.pending_adds = set()
+    return pending
+
+
+def _add_node(ctrl, node):
+    '''poly.addNode() for a module node, remembering the add as unconfirmed until PG3's add-node-done event.
+
+    PG3 works through its queue of node adds slowly (about 0.6 s per node), so an add can still be
+    pending long after this call returns. Delete Module Nodes waits for these (see delete_modules()).
+    The address is recorded before the add is sent so a fast confirmation cannot be missed.
+    '''
+    with _PENDING_LOCK:
+        _pending(ctrl).add(node.address)
+    try:
+        ctrl.poly.addNode(node)
+    except Exception:
+        with _PENDING_LOCK:
+            _pending(ctrl).discard(node.address)
+        raise
+
+
+def add_done(ctrl, data):
+    '''Handle PG3's add-node-done event: that node's add is confirmed. Anything unexpected is ignored.'''
+    address = data.get('address') if isinstance(data, dict) else None
+    if address is None:
+        return
+    with _PENDING_LOCK:
+        _pending(ctrl).discard(address)
+
+
+def _subscribe_add_done(ctrl):
+    '''Listen for add-node-done events (once). If that fails, tracking is turned off so nothing waits for them.'''
+    if getattr(ctrl, 'add_done_listener', None) is not None:
+        return
+
+    def listener(data, _ctrl=ctrl):
+        add_done(_ctrl, data)
+
+    try:
+        ctrl.poly.subscribe(ctrl.poly.ADDNODEDONE, listener)
+    except Exception as ex:
+        ctrl.add_tracking = False
+        LOGGER.warning('Could not listen for node-added confirmations (%s); Delete Module Nodes will not wait for pending adds' % ex)
+        return
+    ctrl.add_done_listener = listener
+    ctrl.add_tracking = True
+
+
 def start(ctrl):
     ctrl.ser = None
     ctrl.ser_key = None
@@ -98,6 +164,9 @@ def start(ctrl):
     ctrl.io_fail = 0
     ctrl.ocelot_ready = False
     ctrl.ocelot_started = True
+    ctrl.pending_adds = set()
+    ctrl.delete_running = False
+    _subscribe_add_done(ctrl)
     discover(ctrl)
 
 
@@ -132,7 +201,7 @@ def _sync_placeholders(ctrl, unsupported):
             continue
         name = ctrl.poly.getValidName(op.placeholder_name(unit, utype))
         node = OcelotPlaceholder(ctrl.poly, ctrl.address, addr, name, unit, utype)
-        ctrl.poly.addNode(node)
+        _add_node(ctrl, node)
         held[addr] = node
         LOGGER.info('Created placeholder node "%s" for the unsupported module type %d at unit %d' % (name, utype, unit))
 
@@ -189,7 +258,7 @@ def discover(ctrl):
                     continue
                 name = ctrl.poly.getValidName('Mod %d IR Zone %d' % (unit, zone))
                 node = OcelotIRZone(ctrl.poly, ctrl.address, addr, name, ctrl, unit, zone)
-                ctrl.poly.addNode(node)
+                _add_node(ctrl, node)
                 ctrl.ir_nodes[addr] = node
             continue
         source = op.io_source_for_unit(utype)
@@ -202,11 +271,13 @@ def discover(ctrl):
                     node.invert = invert
                 continue
             name = ctrl.poly.getValidName('Mod %d %s %d' % (unit, kind.capitalize(), idx))
+            # the node class sets the node type (profile nodedef) for this module kind, e.g. SECU16I Input
+            node_class = io_node_class(utype, kind)
             if kind == 'relay':
-                node = OcelotRelay(ctrl.poly, ctrl.address, addr, name, ctrl, unit, idx, byte, bit, source)
+                node = node_class(ctrl.poly, ctrl.address, addr, name, ctrl, unit, idx, byte, bit, source)
             else:
-                node = OcelotInput(ctrl.poly, ctrl.address, addr, name, unit, idx, byte, bit, invert, source)
-            ctrl.poly.addNode(node)
+                node = node_class(ctrl.poly, ctrl.address, addr, name, unit, idx, byte, bit, invert, source)
+            _add_node(ctrl, node)
             ctrl.io_nodes[addr] = node
 
     if getattr(ctrl, 'resident_ir', None) is None:
@@ -337,9 +408,110 @@ def rescan(ctrl):
         return
     ok = op.rescan(ser)
     LOGGER.info('Rescan %s' % ('acknowledged' if ok else 'NOT acknowledged'))
-    import time
     time.sleep(2)
     discover(ctrl)
+
+
+def _wait_for_pending_adds(ctrl, timeout=None, step=None):
+    '''Wait until PG3 has confirmed every module node add. Returns how many were still unconfirmed (0 = all done).
+
+    Gives up after timeout seconds (default ADD_WAIT_TIMEOUT), checking every step seconds (default
+    ADD_WAIT_STEP). Returns 0 at once when add tracking is off (the confirmation event could not be
+    subscribed to), since nothing would ever clear the pending set.
+    '''
+    timeout = ADD_WAIT_TIMEOUT if timeout is None else timeout
+    step = ADD_WAIT_STEP if step is None else step
+    if getattr(ctrl, 'add_tracking', True) is False:
+        return 0
+    deadline = time.monotonic() + timeout
+    announced = False
+    while True:
+        with _PENDING_LOCK:
+            left = len(_pending(ctrl))
+        if left == 0:
+            return 0
+        if time.monotonic() >= deadline:
+            return left
+        if not announced:
+            LOGGER.info('Delete Module Nodes: waiting for PG3 to finish adding %d nodes before deleting' % left)
+            announced = True
+        time.sleep(step)
+
+
+def _delete_module_nodes(ctrl):
+    '''Delete every expansion-module node this run knows about: relays, inputs, SECU-16IR zones, placeholders.
+
+    The Controller, the Ocelot Resident IR node and the Ocelot Variables node are kept: they belong to
+    the Ocelot itself, not to an expansion module. Nothing is sent to the Ocelot.
+
+    The registries are emptied first (in place, so every reference to them stays valid), so a poll running
+    at the same moment no longer sees the nodes about to go; then each node is deleted. One node that
+    cannot be deleted is logged and does not stop the others. Discover, Rescan Modules, a connection
+    setting change and a plugin restart create the module nodes again, because they are found on the
+    Ocelot. Only nodes this run created or re-discovered are known: a node left over from an earlier run
+    (for example a placeholder whose module has gone) is not in the registries and stays.
+    '''
+    addresses = []
+    for registry_name in ('io_nodes', 'ir_nodes', 'placeholder_nodes'):
+        registry = getattr(ctrl, registry_name, None)
+        if registry:
+            addresses.extend(registry.keys())
+            registry.clear()
+    if not addresses:
+        LOGGER.info('Delete Module Nodes: there are no expansion module nodes to delete')
+        return
+    with _PENDING_LOCK:
+        _pending(ctrl).difference_update(addresses)
+    removed, failed = 0, 0
+    for addr in addresses:
+        try:
+            ctrl.poly.delNode(addr)
+            removed += 1
+        except Exception as ex:
+            failed += 1
+            LOGGER.warning('Delete Module Nodes: could not delete node %s: %s' % (addr, ex))
+    LOGGER.info('Delete Module Nodes: deleted %d module nodes%s (the controller, Ocelot Resident IR and Ocelot Variables are kept)'
+                % (removed, ', %d could not be deleted' % failed if failed else ''))
+
+
+def _delete_worker(ctrl, wait=None):
+    '''Body of the Delete Module Nodes thread: wait for PG3's pending adds, then delete (see delete_modules()).'''
+    try:
+        left = _wait_for_pending_adds(ctrl, wait)
+        if left:
+            LOGGER.warning('Delete Module Nodes: PG3 had still not confirmed %d node adds after waiting; deleting anyway. '
+                           'Any of those nodes that PG3 adds afterwards will stay: press Discover, wait, then Delete Module Nodes again.' % left)
+        _delete_module_nodes(ctrl)
+    except Exception as ex:
+        LOGGER.error('Delete Module Nodes failed: %s' % ex)
+    finally:
+        with _PENDING_LOCK:
+            ctrl.delete_running = False
+
+
+def delete_modules(ctrl, wait=None):
+    '''The Delete Module Nodes command: delete the expansion-module nodes in a background thread.
+
+    PG3 confirms node adds slowly (about 0.6 s each), and removing a node whose add is still queued does
+    not stop that add: PG3 creates it afterwards (seen in the 1.16.0 log, 17 nodes re-created after the
+    delete). So the thread first waits for PG3 to confirm the pending adds (up to wait seconds, default
+    ADD_WAIT_TIMEOUT), then deletes. It is a thread so the command handler is not blocked: the
+    confirmations are processed by the same handler. A second press while one is running is ignored.
+
+    Returns the thread that was started, or None when one was already running.
+    '''
+    with _PENDING_LOCK:
+        if getattr(ctrl, 'delete_running', False):
+            already = True
+        else:
+            already = False
+            ctrl.delete_running = True
+    if already:
+        LOGGER.info('Delete Module Nodes: already in progress, this request is ignored')
+        return None
+    thread = threading.Thread(target=_delete_worker, args=(ctrl, wait), name='ocelot-delete-modules', daemon=True)
+    thread.start()
+    return thread
 
 
 def query(ctrl):

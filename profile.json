@@ -171,6 +171,11 @@
             "id": "RESCAN",
             "name": "Rescan Modules",
             "native": "false"
+          },
+          {
+            "id": "DELMODULES",
+            "name": "Delete Module Nodes",
+            "native": "false"
           }
         ]
       },
@@ -180,8 +185,8 @@
       }
     },
     {
-      "id": "relay",
-      "name": "Ocelot Relay",
+      "id": "secu16_relay",
+      "name": "SECU16 Relay",
       "properties": [
         {
           "id": "ST",
@@ -210,8 +215,38 @@
       }
     },
     {
-      "id": "input",
-      "name": "Ocelot Input",
+      "id": "rly08xa_relay",
+      "name": "RLY08XA Relay",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Relay",
+          "editor": "ocelot_onoff"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "DON",
+            "name": "On",
+            "native": "true"
+          },
+          {
+            "id": "DOF",
+            "name": "Off",
+            "native": "true"
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "secu16_input",
+      "name": "SECU16 Input",
       "properties": [
         {
           "id": "ST",
@@ -240,8 +275,38 @@
       }
     },
     {
-      "id": "irzone",
-      "name": "Ocelot IR Zone",
+      "id": "secu16i_input",
+      "name": "SECU16I Input",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Input",
+          "editor": "ocelot_input"
+        }
+      ],
+      "cmds": {
+        "sends": [
+          {
+            "id": "DON",
+            "name": "On",
+            "native": "true"
+          },
+          {
+            "id": "DOF",
+            "name": "Off",
+            "native": "true"
+          }
+        ],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "secu16ir_zone",
+      "name": "SECU16IR Zone",
       "properties": [
         {
           "id": "ST",

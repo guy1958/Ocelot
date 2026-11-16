@@ -1,4 +1,11 @@
-'''Node classes for the Ocelot plugin: expansion-module relays/inputs, IR outputs, program variables and placeholders.'''
+'''Node classes for the Ocelot plugin: expansion-module relays/inputs, IR outputs, program variables and placeholders.
+
+Since 1.17.0 every kind of module point has its own node type (profile nodedef), so the admin console's
+Type column names the module kind: SECU16 Input / SECU16 Relay (type 11), SECU16I Input (type 12),
+RLY08XA Relay (type 13), SECU16IR Zone (type 6). OcelotRelay and OcelotInput are the SECU-16 classes
+(also named Secu16Relay and Secu16Input) and the bases of the other two; use io_node_class() to get the
+class for a module type.
+'''
 import udi_interface
 import ocelot_proto as op
 
@@ -7,7 +14,7 @@ LOGGER = udi_interface.LOGGER
 
 
 class OcelotRelay(Node):
-    '''One relay of an expansion module.
+    '''One relay of a SECU-16 expansion module (node type 'SECU16 Relay'); the base of Rly08xaRelay.
 
     After an On/Off command the Ocelot acknowledged, the commanded state is sent to IoX at once
     (forced, so it is reported even if the plugin's cached value is the same). The latched I/O is
@@ -17,7 +24,7 @@ class OcelotRelay(Node):
 
     source says which read supplies this node's data: op.SOURCE_LATCHED (SECU-16, SECU-16I) or
     op.SOURCE_REALTIME (RLY08-XA, the default).'''
-    id = 'relay'
+    id = 'secu16_relay'
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 25}]
 
     def __init__(self, polyglot, primary, address, name, ctrl, unit, relay, byte, bit, source=op.SOURCE_REALTIME):
@@ -75,9 +82,29 @@ class OcelotRelay(Node):
     commands = {'DON': don, 'DOF': dof}
 
 
+Secu16Relay = OcelotRelay
+
+
+class Rly08xaRelay(OcelotRelay):
+    '''A relay of an RLY08-XA module (unit type 13); node type 'RLY08XA Relay'. Behaves exactly like OcelotRelay.
+
+    It repeats the command table because the node type needs its own class-level commands.'''
+    id = 'rly08xa_relay'
+
+    def don(self, command=None):
+        self._set(True)
+
+    def dof(self, command=None):
+        self._set(False)
+
+    commands = {'DON': don, 'DOF': dof}
+
+
 class OcelotInput(Node):
-    '''One input bit of an expansion module. source says which read supplies it (see OcelotRelay).'''
-    id = 'input'
+    '''One input bit of a SECU-16 expansion module (node type 'SECU16 Input'); the base of Secu16IInput.
+
+    source says which read supplies it (see OcelotRelay).'''
+    id = 'secu16_input'
     drivers = [{'driver': 'ST', 'value': 0, 'uom': 25}]
 
     def __init__(self, polyglot, primary, address, name, unit, index, byte, bit, invert=False, source=op.SOURCE_REALTIME):
@@ -101,6 +128,28 @@ class OcelotInput(Node):
             self.reportCmd('DON' if val else 'DOF')
 
 
+Secu16Input = OcelotInput
+
+
+class Secu16IInput(OcelotInput):
+    '''An input of a SECU-16I module (unit type 12); node type 'SECU16I Input'. Behaves exactly like OcelotInput.'''
+    id = 'secu16i_input'
+
+
+# (unit type code, 'relay' | 'input') -> node class. Every point kind points_for_unit() returns is here.
+IO_NODE_CLASSES = {
+    (op.TYPE_SECU16, 'input'): Secu16Input,
+    (op.TYPE_SECU16, 'relay'): Secu16Relay,
+    (op.TYPE_SECU16I, 'input'): Secu16IInput,
+    (op.TYPE_RLY08XA, 'relay'): Rly08xaRelay,
+}
+
+
+def io_node_class(unit_type, kind):
+    '''The node class for one point of a module: kind is 'relay' or 'input'. Raises KeyError for a combination that does not exist.'''
+    return IO_NODE_CLASSES[(unit_type, kind)]
+
+
 class OcelotPlaceholder(Node):
     '''Placeholder for an expansion module whose Get Unit Type code this plugin does not support.
 
@@ -120,8 +169,8 @@ class OcelotPlaceholder(Node):
 
 
 class OcelotIRZone(Node):
-    '''One output zone of a SECU-16IR module; send-only.'''
-    id = 'irzone'
+    '''One output zone of a SECU-16IR module (unit type 6); send-only. Node type 'SECU16IR Zone'.'''
+    id = 'secu16ir_zone'
     drivers = [
         {'driver': 'ST', 'value': 0, 'uom': 25},
         {'driver': 'IR_NUM', 'value': 0, 'uom': 108},

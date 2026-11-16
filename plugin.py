@@ -123,5 +123,9 @@ class Controller(udi_interface.Node):
         import ocelot_ctl
         ocelot_ctl.rescan(self)
 
+    def delmodules(self, *args, **kwargs):
+        import ocelot_ctl
+        ocelot_ctl.delete_modules(self)
+
     # --- command dispatch (profile cmds.accepts; see udi_interface.Node.runCmd) ---
-    commands = {'DISCOVER': discover, 'QUERY': query, 'RESCAN': rescan}
+    commands = {'DISCOVER': discover, 'QUERY': query, 'RESCAN': rescan, 'DELMODULES': delmodules}
