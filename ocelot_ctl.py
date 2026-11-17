@@ -480,7 +480,7 @@ def _delete_worker(ctrl, wait=None):
         left = _wait_for_pending_adds(ctrl, wait)
         if left:
             LOGGER.warning('Delete Module Nodes: PG3 had still not confirmed %d node adds after waiting; deleting anyway. '
-                           'Any of those nodes that PG3 adds afterwards will stay: press Discover, wait, then Delete Module Nodes again.' % left)
+                           'Any of those nodes that PG3 adds afterwards will stay: press Rescan Modules, wait, then Delete Module Nodes again.' % left)
         _delete_module_nodes(ctrl)
     except Exception as ex:
         LOGGER.error('Delete Module Nodes failed: %s' % ex)

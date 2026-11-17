@@ -6,7 +6,7 @@ An IoX plugin for the Applied Digital **Ocelot** home-automation controller (the
 
 ## What you get
 
-* **Controller node**: connection status (managed by PG3), plus *Discover*, *Query*, *Rescan Modules* and *Delete Module Nodes* commands.
+* **Controller node**: connection status (managed by PG3), plus *Query*, *Rescan Modules* and *Delete Module Nodes* commands. There is no separate *Discover* button since 1.18.0; *Rescan Modules* does the discovery (see "Changed in 1.18.0").
 * **Relay nodes** (On/Off) for every relay on SECU-16 and RLY08-XA expansion modules (node types *SECU16 Relay* and *RLY08XA Relay*). When the Ocelot acknowledges an On/Off command the new state is sent to IoX immediately and stays shown (see "Changed in 1.15.0"); the plugin then re-reads the latched inputs and relays of the SECU-16 and SECU-16I modules (see "Changed in 1.13.0").
 * **Input nodes** (On/Off) for every digital input bit on SECU-16 and SECU-16I modules (node types *SECU16 Input* and *SECU16I Input*). They also send DON/DOF on change (named *On* and *Off* in the Program editor) so Programs can trigger on them.
 * **IR zone nodes**: 16 per SECU-16IR module (node type *SECU16IR Zone*), each with a **Send IR** command that takes an *IR Number* (0-1023). See "IR output" below.
@@ -45,7 +45,7 @@ Connecting directly to a serial device on the eisy (a path such as `/dev/cuaU0`)
 
 ## Unsupported modules
 
-The plugin asks the Ocelot for the type code of every expansion module (Get Unit Type) at startup, on **Discover**, after **Rescan Modules**, when a connection setting changes, and on the once-a-minute retry while the Ocelot is not answering. Types 6 (SECU-16IR), 11 (SECU-16), 12 (SECU-16I) and 13 (RLY08-XA) get their real nodes. The reply value 254 means an empty slot and is ignored. **Any other type code gets a placeholder node** (added in 1.14.0):
+The plugin asks the Ocelot for the type code of every expansion module (Get Unit Type) at startup, after **Rescan Modules**, when a connection setting changes, and on the once-a-minute retry while the Ocelot is not answering. Types 6 (SECU-16IR), 11 (SECU-16), 12 (SECU-16I) and 13 (RLY08-XA) get their real nodes. The reply value 254 means an empty slot and is ignored. **Any other type code gets a placeholder node** (added in 1.14.0):
 
 * The node is named `Mod <unit> Type <type>`, for example `Mod 5 Type 20` for the module at unit 5 that reports type 20. Its address is `u<unit>t<type>` (`u5t20`).
 * Its only property, **Module Type**, shows the type number the Ocelot reported.
@@ -55,23 +55,32 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 * A placeholder is only removed while the plugin is running and notices the change. One that was made in an earlier run and whose module is gone is not known to the plugin after a restart and stays until you delete it yourself.
 * The new node type is part of the node profile, so it appears in the admin console once the plugin has restarted and re-sent its profile.
 
+## Changed in 1.18.0
+
+* **The Discover button is gone from the Ocelot Controller node.** The *Discover* command was removed from the controller's commands, so it no longer appears in the admin console or as a choice in a Program (Then: ...). A Program that used it will need another command.
+* **Rescan Modules replaces it.** It asks the Ocelot to re-detect its modules (protocol command 32), waits 2 seconds, then runs the same discovery the Discover button ran: it creates any missing module nodes and placeholders and reads the I/O and variables once. Use it after adding, removing or re-addressing an expansion module. If the serial connection is not open it logs an error and does nothing; in that case the plugin reconnects by itself within a minute (or restart it).
+* **Discovery itself is unchanged and still runs on its own** at plugin startup, when IPAddress or IPPort changes, from Rescan Modules, and on the once-a-minute retry while the Ocelot is not answering. Only the button was removed.
+* **After Delete Module Nodes, use Rescan Modules** (or restart the plugin) to bring the nodes back; before 1.18.0 this was the Discover button.
+* The *Discover* entry that PG3 itself may show on the plugin's page (the plugin still declares that it supports discovery) was not changed.
+* Covered by the hardware-free tests; not yet checked on the installer's system.
+
 ## Changed in 1.17.0
 
 * **Per-module node types.** The Type column used to say "Ocelot Input" or "Ocelot Relay" for every module. Now it names the module kind: *SECU16 Input*, *SECU16 Relay*, *SECU16I Input*, *RLY08XA Relay* and *SECU16IR Zone* (see "Node types" above). The old generic types `relay`, `input` and `irzone` no longer exist in the profile.
 * **Nothing else changes.** Commands (On/Off, Send IR), properties and their labels, DON/DOF events from inputs, node addresses (`u2i0`) and node names (`Mod 2 Input 0`) are as before. The polling, the latched and real-time reads and the delete command are untouched.
-* **Existing nodes keep their old type until they are deleted.** PG3 is only asked to add a node; this plugin could not check what PG3 does when a node that already exists is added again with a different type, so the safe route is to recreate them. After upgrading and restarting: press **Delete Module Nodes** (it waits for PG3 to finish adding nodes, see 1.16.1), then press **Discover**. The nodes come back with the new types.
+* **Existing nodes keep their old type until they are deleted.** PG3 is only asked to add a node; this plugin could not check what PG3 does when a node that already exists is added again with a different type, so the safe route is to recreate them. After upgrading and restarting: press **Delete Module Nodes** (it waits for PG3 to finish adding nodes, see 1.16.1), then press **Discover** (since 1.18.0: **Rescan Modules**). The nodes come back with the new types.
 * **Programs and scenes** that use a module node lose that reference when the node is deleted (as with any delete); check them afterwards. Program conditions that used an input's DON/DOF still work once the node exists again.
 * **Resident IR, Variables and the Controller are not touched** and do not need recreating.
-* Not yet seen on hardware: how the Type column looks after the recreate. Covered by hardware-free tests (`tests/test_ocelot_nodetypes.py`).
+* Checked on the installer's system: after the restart PG3 reported 8 SECU16 Input, 8 SECU16 Relay and 16 SECU16I Input nodes, and the installer confirmed the Type column looks right. Covered by hardware-free tests (`tests/test_ocelot_nodetypes.py`).
 
 ## Changed in 1.16.1
 
 * **Fixed: Delete Module Nodes could leave nodes behind.** In 1.16.0, pressing it soon after the plugin started (or after Discover) deleted the nodes while PG3 was still working through its queue of node additions. PG3 confirms those additions slowly (about 0.6 seconds per node, so about 25 seconds for 40 nodes). A removal does not cancel an addition still waiting in that queue, so PG3 created those nodes anyway afterwards; the plugin had already forgotten them, so a second press found nothing to delete. In the 1.16.0 log, 17 module nodes (Mod 2 Input 15, Mod 4 Input 0-7 and Mod 4 Relay 0-7) were created after the removal had been acknowledged. That explanation rests on the timestamps in that log (adds confirmed after the removals); IoX's own node list was not examined.
 * **What it does now:** the plugin remembers every module node it has asked PG3 to add until PG3 confirms it (the add-node-done event). **Delete Module Nodes** then runs in a background thread: it first waits until all of those are confirmed, and only then deletes. The log says "waiting for PG3 to finish adding N nodes" when it has to wait.
-* **The wait is at most 2 minutes.** If PG3 still has not confirmed some adds by then, the plugin logs a warning and deletes anyway. A node PG3 adds after that stays: press **Discover**, wait for the nodes to appear, then press **Delete Module Nodes** again.
+* **The wait is at most 2 minutes.** If PG3 still has not confirmed some adds by then, the plugin logs a warning and deletes anyway. A node PG3 adds after that stays: press **Rescan Modules** (before 1.18.0: Discover), wait for the nodes to appear, then press **Delete Module Nodes** again.
 * **A second press while a delete is running is ignored** (it is logged). After it finishes, the command can be used again.
 * **If the plugin cannot listen for PG3's confirmations** (a warning is logged at startup), it does not wait, and behaves like 1.16.0.
-* **Nodes left over from the 1.16.0 problem:** they exist in IoX but were not tracked. Restarting the plugin makes Discover add every module node again, which tracks them, so the next **Delete Module Nodes** removes them too.
+* **Nodes left over from the 1.16.0 problem:** they exist in IoX but were not tracked. Restarting the plugin makes discovery add every module node again, which tracks them, so the next **Delete Module Nodes** removes them too.
 * **Resident IR and Variables** are not module nodes: they are still never deleted, and the command does not wait for them.
 * Checked on the installer's system with 1.16.1: two presses of Delete Module Nodes each deleted all 34 module nodes, and Discover created them again (from the log; IoX's own node list was not examined).
 
@@ -80,8 +89,8 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 * **New controller command: Delete Module Nodes.** It is a button on the root *Ocelot Controller* node in the admin console, and can also be used from a Program (Then: *Delete Module Nodes*). It deletes every expansion module node the running plugin knows about: all relay nodes, all input nodes, all SECU-16IR zone nodes and all placeholder nodes.
 * **What is kept:** the *Ocelot Controller* itself, **Ocelot Resident IR** and **Ocelot Variables**. Those belong to the Ocelot itself, not to an expansion module, so this command never deletes them.
 * **Nothing is sent to the Ocelot.** Only nodes in IoX are deleted; the modules and their relays are not touched.
-* **The nodes come back.** The module nodes are found on the Ocelot, so **Discover**, **Rescan Modules**, a change to IPAddress or IPPort, and a plugin restart create them again. The command clears them; it does not stop them being discovered.
-* **Programs and scenes** that use a deleted node lose that reference. There is no confirmation step when the button is pressed. Nodes that are created again by Discover get the same addresses and names as before, but any Program or scene entry that pointed at a deleted node has to be checked.
+* **The nodes come back.** The module nodes are found on the Ocelot, so discovery (**Rescan Modules**, a change to IPAddress or IPPort, and a plugin restart; in 1.16.0 also the Discover button) creates them again. The command clears them; it does not stop them being discovered.
+* **Programs and scenes** that use a deleted node lose that reference. There is no confirmation step when the button is pressed. Nodes that are created again by discovery get the same addresses and names as before, but any Program or scene entry that pointed at a deleted node has to be checked.
 * **Only nodes this run knows about are deleted.** A node left over from an earlier run (for example a placeholder whose module has since gone, see "Unsupported modules") is not tracked after a restart, so it stays and has to be deleted by hand.
 * **A node that cannot be deleted is logged and skipped;** the others are still deleted. The log shows how many module nodes were deleted (and how many could not be).
 * **While the module nodes are cleared, each short poll only makes its link check** (one Get Real Time I/O read, to confirm the Ocelot still answers), and the variables keep being read as before.
@@ -129,7 +138,7 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 
 ## Changed in 1.10.0
 
-* **The program variables are now read on every short poll** (every 5 seconds by default), straight after the relay/input read. The **Read Variable**, **Read Value** and **Last Read Result** properties therefore follow changes made by a CPU-XA program, C-Max or Write Variable within one poll, without having to run Get Variables or Read Variable. Those commands, Query and Discover still read the variables on request as before.
+* **The program variables are now read on every short poll** (every 5 seconds by default), straight after the relay/input read. The **Read Variable**, **Read Value** and **Last Read Result** properties therefore follow changes made by a CPU-XA program, C-Max or Write Variable within one poll, without having to run Get Variables or Read Variable. Those commands, Query and discovery still read the variables on request as before.
 * If the relay/input read in the same poll gets no answer, the variable read is skipped for that poll (the link is probably down, and a second read would only add another timeout).
 * Cost: each short poll makes an extra request, and each reply is 264 bytes on the single serial link shared with everything else. On a slow adapter speed this uses a noticeable share of each 5 seconds. The interval is the plugin's short poll setting.
 * A variable read made by the poll is logged at debug level only; a failed read is still logged as an error (every poll while it keeps failing).
@@ -145,7 +154,7 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 ## Changed in 1.9.0
 
 * **Program variables can now be read.** The `Ocelot Variables` node has two new commands, **Get Variables** and **Read Variable** (a variable number 0-127), and three new properties: **Last Read Result**, **Read Variable** and **Read Value**. See "Program variables" below for what is and is not known about the command behind them.
-* In 1.9.0 the variables were read **only when you asked**: on Get Variables, Read Variable, Query (the controller's, or the Query of the whole plugin) and Discover (which also runs at startup). Since 1.10.0 they are also read on every short poll, and since 1.11.0 right after every write (see above).
+* In 1.9.0 the variables were read **only when you asked**: on Get Variables, Read Variable, Query (the controller's, or the Query of the whole plugin) and discovery (which also runs at startup). Since 1.10.0 they are also read on every short poll, and since 1.11.0 right after every write (see above).
 * The editor and node definition changed, so the new commands and properties appear in the admin console and Programs once the plugin has restarted and re-sent its profile.
 * The earlier README statement that variables cannot be read was wrong for this Ocelot, and has been corrected.
 
@@ -204,7 +213,7 @@ The `Ocelot Variables` node's **Write Variable** command sends the protocol's *W
 * Reply layout, as seen on a real Ocelot: a 6-byte header that repeats the first six bytes of the request, then 256 data bytes, then 2 trailer bytes. The trailer is not interpreted, like the CRC on the other read replies. The plugin rejects a reply whose header differs.
 * The 256 data bytes are 128 variables of 16 bits, **least significant byte first**: variable *n* is `data[2n] + 256 * data[2n+1]`. This was checked on the installer's Ocelot, where variable 58 held 999 and variable 59 held 1001; they sat at data bytes 116-119 as `e7 03 e9 03`. This is the same byte order as Write Variable. (The installer had first described the order as most significant byte first; the real reply showed that is not the case.)
 * Variables 120-127 were non-zero on that Ocelot (1035, 1, 0, 6, 37, 17, 15, 0). Whether the Ocelot itself updates some variables, such as a clock or counters, has **not** been checked, so do not assume a variable only changes when you write it.
-* **The variables are read on every short poll** (from 1.10.0), right after the relay/input read, **immediately after every Write Variable** that reached the Ocelot (from 1.11.0), and on Get Variables, Read Variable, Query and Discover. A change made by a CPU-XA program or C-Max is therefore shown within one poll (5 seconds by default); a change made by Write Variable is shown straight away. The poll's variable read is skipped when an I/O read of the same poll got no answer.
+* **The variables are read on every short poll** (from 1.10.0), right after the relay/input read, **immediately after every Write Variable** that reached the Ocelot (from 1.11.0), and on Get Variables, Read Variable, Query and discovery. A change made by a CPU-XA program or C-Max is therefore shown within one poll (5 seconds by default); a change made by Write Variable is shown straight away. The poll's variable read is skipped when an I/O read of the same poll got no answer.
 * **Read Value shows one variable**: the one chosen with Read Variable (variable 0 until you choose). After a write to a different variable, Read Value still shows the chosen one.
 * Two other guessed requests, `11 00 00 00 00 00 00 11` and `24 00 00 00 00 00 00 24`, were tried on the real Ocelot and got no reply. They are not used.
 * Only variable values are read: no variable name, and no information on how the Ocelot's own programs use them.
@@ -224,7 +233,7 @@ The `Ocelot Variables` node's **Write Variable** command sends the protocol's *W
 1. Install, then open the plugin's configuration page.
 2. Set **IPAddress** and **IPPort** (see "Connecting to the Ocelot" above and the on-page help).
 3. Check that the adapter's serial settings match the Ocelot's (see "Known gaps").
-4. Restart or wait a few seconds; use **Discover** after adding expansion modules, **Rescan Modules** if the Ocelot itself needs to re-detect its modules.
+4. Restart or wait a few seconds. Use **Rescan Modules** after adding expansion modules or changing their addresses: it asks the Ocelot itself to re-detect its modules, then looks for them and creates their nodes.
 
 If the connection fails at startup, the plugin retries discovery about once a minute. Notice banners on the configuration page report problems (invalid connection settings, cannot open the connection, Ocelot not answering).
 
@@ -244,9 +253,10 @@ Tested against a real Ocelot through a serial-to-Ethernet adapter (`socket://hos
 * **Variable writes** (Write Variable, command 41): reported working by the installer, with the range 0-127 / 0-65535 stated above. Which variables or values were tried was not recorded.
 * **Variable reads** (Get Variables): the frame answered with 264 bytes on a real Ocelot. Variables 58 and 59, which the installer knew to hold 999 and 1001, were found at the matching positions, least significant byte first. The single read captured is what the layout above is based on; the tests rebuild it. A written value read back through this plugin (a write followed by a read) has not been tried on hardware.
 * **Delete Module Nodes (1.16.1)**: two presses on the installer's system each deleted all 34 module nodes, and Discover created them again (from the log). Version 1.16.0 had left 17 behind (see "Changed in 1.16.1").
+* **Per-module node types (1.17.0)**: after the restart PG3 held 8 SECU16 Input, 8 SECU16 Relay and 16 SECU16I Input nodes, and the installer confirmed the Type column looks right.
 * **The Ocelot on the installer's system** reports unit 2 as type 12 (SECU-16I) and unit 4 as type 11 (SECU-16), so the plugin has now created SECU-16I input nodes on real hardware; whether their input states are right has not been checked here (the README had no SECU-16I to test before).
 
-Not yet confirmed on hardware: **the per-module node types shown in the Type column (1.17.0)**; **placeholder nodes for unsupported module types (1.14.0)**; the SECU-16I input layout; IR sending (remote and resident); reading the variables on every short poll (1.10.0) and the read straight after a variable write (1.11.0); these are covered by hardware-free tests only. The serial settings in use were those of the adapter, which were not recorded here.
+Not yet confirmed on hardware: **removing the Discover command (1.18.0)**; **placeholder nodes for unsupported module types (1.14.0)**; the SECU-16I input layout; IR sending (remote and resident); reading the variables on every short poll (1.10.0) and the read straight after a variable write (1.11.0); these are covered by hardware-free tests only. The serial settings in use were those of the adapter, which were not recorded here.
 
 ## Known gaps: please read
 

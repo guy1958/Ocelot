@@ -128,4 +128,4 @@ class Controller(udi_interface.Node):
         ocelot_ctl.delete_modules(self)
 
     # --- command dispatch (profile cmds.accepts; see udi_interface.Node.runCmd) ---
-    commands = {'DISCOVER': discover, 'QUERY': query, 'RESCAN': rescan, 'DELMODULES': delmodules}
+    commands = {'QUERY': query, 'RESCAN': rescan, 'DELMODULES': delmodules}

@@ -158,11 +158,6 @@
         "sends": [],
         "accepts": [
           {
-            "id": "DISCOVER",
-            "name": "Discover",
-            "native": "true"
-          },
-          {
             "id": "QUERY",
             "name": "Query",
             "native": "true"
