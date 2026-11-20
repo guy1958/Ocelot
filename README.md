@@ -16,7 +16,7 @@ An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation
 
 * You can still interact with unsupported modules (ie: bobcat modules, Speakez) by writing C-Max programs in the Ocelot/Leopard that look for a variable of your choosing to be set to a certain value to trigger an action, or set the input value of a module (such as analog inputs on a SECU16, light sensor Bobcat, etc) to a variable, which can then be read by your IoX program.
 
-Nodes are named `Mod <unit> Relay <n>` / `Mod <unit> Input <n>` / `Mod <unit> IR Zone <n>`, using the 0-based point numbering of C-Max's "Module/Point" convention. You can rename them in the admin console (for example after the room or device each IR zone feeds). Creating placeholder nodes for unsupported modules allows to maintain a one to one correlation between the adnet address of a module in C-Max to the module name (Mod x) in the plugin nodes.
+Nodes are named `Mod <unit> Relay <n>` / `Mod <unit> Input <n>` / `Mod <unit> IR Zone <n>`, using the 0-based point numbering of C-Max's "Module/Point" convention. You can rename them in the admin console (for example after the room or device each IR zone feeds). 
 
 ## Node types (the Type column)
 
@@ -56,6 +56,7 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 * The notice banner "Ignored expansion modules of an unsupported type", shown by versions up to 1.13.0, no longer exists because these modules are no longer ignored. The log records the units and type codes found.
 * A placeholder is only removed while the plugin is running and notices the change. One that was made in an earlier run and whose module is gone is not known to the plugin after a restart and stays until you delete it yourself.
 * The new node type is part of the node profile, so it appears in the admin console once the plugin has restarted and re-sent its profile.
+* Creating placeholder nodes for unsupported modules allows to maintain a one to one correlation between the adnet address of a module in C-Max to the module name (Mod x) in the plugin nodes.
 
 ## Changed in 1.21.0
 
