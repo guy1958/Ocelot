@@ -2,7 +2,7 @@
 
 # Ocelot (Adicon / Applied Digital)
 
-An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation controllers , talking its serial protocol through a serial-to-Ethernet adapter (raw TCP).
+An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation controllers, talking its serial protocol through a serial-to-Ethernet adapter (raw TCP).
 
 ## What you get
 
