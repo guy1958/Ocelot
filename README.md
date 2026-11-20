@@ -16,7 +16,7 @@ An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation
 
 * You can still interact with unsupported modules (ie: bobcat modules, Speakez) by writing C-Max programs in the Ocelot/Leopard that look for a variable of your choosing to be set to a certain value to trigger an action, or set the input value of a module (such as analog inputs on a SECU16, light sensor Bobcat, etc) to a variable, which can then be read by your IoX program.
 
-Nodes are named `Mod <unit> Relay <n>` / `Mod <unit> Input <n>` / `Mod <unit> IR Zone <n>`, using the 0-based point numbering of C-Max's "Module/Point" convention. You can rename them in the admin console (for example after the room or device each IR zone feeds).
+Nodes are named `Mod <unit> Relay <n>` / `Mod <unit> Input <n>` / `Mod <unit> IR Zone <n>`, using the 0-based point numbering of C-Max's "Module/Point" convention. You can rename them in the admin console (for example after the room or device each IR zone feeds). Creating placeholder nodes for unsupported modules allows to maintain a one to one correlation between the adnet address of a module in C-Max to the module name (Mod x) in the plugin nodes.
 
 ## Node types (the Type column)
 
