@@ -412,6 +412,646 @@
           "id": "READ_VAL",
           "name": "Read Value",
           "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_0",
+          "name": "Variable 0",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_1",
+          "name": "Variable 1",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_2",
+          "name": "Variable 2",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_3",
+          "name": "Variable 3",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_4",
+          "name": "Variable 4",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_5",
+          "name": "Variable 5",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_6",
+          "name": "Variable 6",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_7",
+          "name": "Variable 7",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_8",
+          "name": "Variable 8",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_9",
+          "name": "Variable 9",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_10",
+          "name": "Variable 10",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_11",
+          "name": "Variable 11",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_12",
+          "name": "Variable 12",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_13",
+          "name": "Variable 13",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_14",
+          "name": "Variable 14",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_15",
+          "name": "Variable 15",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_16",
+          "name": "Variable 16",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_17",
+          "name": "Variable 17",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_18",
+          "name": "Variable 18",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_19",
+          "name": "Variable 19",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_20",
+          "name": "Variable 20",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_21",
+          "name": "Variable 21",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_22",
+          "name": "Variable 22",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_23",
+          "name": "Variable 23",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_24",
+          "name": "Variable 24",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_25",
+          "name": "Variable 25",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_26",
+          "name": "Variable 26",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_27",
+          "name": "Variable 27",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_28",
+          "name": "Variable 28",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_29",
+          "name": "Variable 29",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_30",
+          "name": "Variable 30",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_31",
+          "name": "Variable 31",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_32",
+          "name": "Variable 32",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_33",
+          "name": "Variable 33",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_34",
+          "name": "Variable 34",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_35",
+          "name": "Variable 35",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_36",
+          "name": "Variable 36",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_37",
+          "name": "Variable 37",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_38",
+          "name": "Variable 38",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_39",
+          "name": "Variable 39",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_40",
+          "name": "Variable 40",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_41",
+          "name": "Variable 41",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_42",
+          "name": "Variable 42",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_43",
+          "name": "Variable 43",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_44",
+          "name": "Variable 44",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_45",
+          "name": "Variable 45",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_46",
+          "name": "Variable 46",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_47",
+          "name": "Variable 47",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_48",
+          "name": "Variable 48",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_49",
+          "name": "Variable 49",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_50",
+          "name": "Variable 50",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_51",
+          "name": "Variable 51",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_52",
+          "name": "Variable 52",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_53",
+          "name": "Variable 53",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_54",
+          "name": "Variable 54",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_55",
+          "name": "Variable 55",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_56",
+          "name": "Variable 56",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_57",
+          "name": "Variable 57",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_58",
+          "name": "Variable 58",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_59",
+          "name": "Variable 59",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_60",
+          "name": "Variable 60 Last received IR",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_61",
+          "name": "Variable 61 Leopard Beep Counter",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_62",
+          "name": "Variable 62 Beep Duration",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_63",
+          "name": "Variable 63 Leopard Screen Number",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_64",
+          "name": "Variable 64",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_65",
+          "name": "Variable 65",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_66",
+          "name": "Variable 66",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_67",
+          "name": "Variable 67",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_68",
+          "name": "Variable 68",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_69",
+          "name": "Variable 69",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_70",
+          "name": "Variable 70",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_71",
+          "name": "Variable 71",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_72",
+          "name": "Variable 72",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_73",
+          "name": "Variable 73",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_74",
+          "name": "Variable 74",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_75",
+          "name": "Variable 75",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_76",
+          "name": "Variable 76",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_77",
+          "name": "Variable 77",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_78",
+          "name": "Variable 78",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_79",
+          "name": "Variable 79",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_80",
+          "name": "Variable 80",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_81",
+          "name": "Variable 81",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_82",
+          "name": "Variable 82",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_83",
+          "name": "Variable 83",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_84",
+          "name": "Variable 84",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_85",
+          "name": "Variable 85",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_86",
+          "name": "Variable 86",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_87",
+          "name": "Variable 87",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_88",
+          "name": "Variable 88",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_89",
+          "name": "Variable 89",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_90",
+          "name": "Variable 90",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_91",
+          "name": "Variable 91",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_92",
+          "name": "Variable 92",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_93",
+          "name": "Variable 93",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_94",
+          "name": "Variable 94",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_95",
+          "name": "Variable 95",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_96",
+          "name": "Variable 96",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_97",
+          "name": "Variable 97",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_98",
+          "name": "Variable 98",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_99",
+          "name": "Variable 99",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_100",
+          "name": "Variable 100",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_101",
+          "name": "Variable 101",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_102",
+          "name": "Variable 102",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_103",
+          "name": "Variable 103",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_104",
+          "name": "Variable 104",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_105",
+          "name": "Variable 105",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_106",
+          "name": "Variable 106",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_107",
+          "name": "Variable 107",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_108",
+          "name": "Variable 108",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_109",
+          "name": "Variable 109",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_110",
+          "name": "Variable 110",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_111",
+          "name": "Variable 111",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_112",
+          "name": "Variable 112",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_113",
+          "name": "Variable 113",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_114",
+          "name": "Variable 114",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_115",
+          "name": "Variable 115",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_116",
+          "name": "Variable 116",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_117",
+          "name": "Variable 117",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_118",
+          "name": "Variable 118",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_119",
+          "name": "Variable 119",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_120",
+          "name": "Variable 120",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_121",
+          "name": "Variable 121",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_122",
+          "name": "Variable 122",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_123",
+          "name": "Variable 123",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_124",
+          "name": "Variable 124",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_125",
+          "name": "Variable 125",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_126",
+          "name": "Variable 126",
+          "editor": "ocelot_var_val"
+        },
+        {
+          "id": "VAR_127",
+          "name": "Variable 127",
+          "editor": "ocelot_var_val"
         }
       ],
       "cmds": {
@@ -456,6 +1096,1542 @@
                 "editor": "ocelot_var_num",
                 "optional": false,
                 "init": "READ_VAR"
+              }
+            ]
+          },
+          {
+            "id": "VAR_0",
+            "name": "Variable 0",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_0"
+              }
+            ]
+          },
+          {
+            "id": "VAR_1",
+            "name": "Variable 1",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_1"
+              }
+            ]
+          },
+          {
+            "id": "VAR_2",
+            "name": "Variable 2",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_2"
+              }
+            ]
+          },
+          {
+            "id": "VAR_3",
+            "name": "Variable 3",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_3"
+              }
+            ]
+          },
+          {
+            "id": "VAR_4",
+            "name": "Variable 4",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_4"
+              }
+            ]
+          },
+          {
+            "id": "VAR_5",
+            "name": "Variable 5",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_5"
+              }
+            ]
+          },
+          {
+            "id": "VAR_6",
+            "name": "Variable 6",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_6"
+              }
+            ]
+          },
+          {
+            "id": "VAR_7",
+            "name": "Variable 7",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_7"
+              }
+            ]
+          },
+          {
+            "id": "VAR_8",
+            "name": "Variable 8",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_8"
+              }
+            ]
+          },
+          {
+            "id": "VAR_9",
+            "name": "Variable 9",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_9"
+              }
+            ]
+          },
+          {
+            "id": "VAR_10",
+            "name": "Variable 10",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_10"
+              }
+            ]
+          },
+          {
+            "id": "VAR_11",
+            "name": "Variable 11",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_11"
+              }
+            ]
+          },
+          {
+            "id": "VAR_12",
+            "name": "Variable 12",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_12"
+              }
+            ]
+          },
+          {
+            "id": "VAR_13",
+            "name": "Variable 13",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_13"
+              }
+            ]
+          },
+          {
+            "id": "VAR_14",
+            "name": "Variable 14",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_14"
+              }
+            ]
+          },
+          {
+            "id": "VAR_15",
+            "name": "Variable 15",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_15"
+              }
+            ]
+          },
+          {
+            "id": "VAR_16",
+            "name": "Variable 16",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_16"
+              }
+            ]
+          },
+          {
+            "id": "VAR_17",
+            "name": "Variable 17",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_17"
+              }
+            ]
+          },
+          {
+            "id": "VAR_18",
+            "name": "Variable 18",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_18"
+              }
+            ]
+          },
+          {
+            "id": "VAR_19",
+            "name": "Variable 19",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_19"
+              }
+            ]
+          },
+          {
+            "id": "VAR_20",
+            "name": "Variable 20",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_20"
+              }
+            ]
+          },
+          {
+            "id": "VAR_21",
+            "name": "Variable 21",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_21"
+              }
+            ]
+          },
+          {
+            "id": "VAR_22",
+            "name": "Variable 22",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_22"
+              }
+            ]
+          },
+          {
+            "id": "VAR_23",
+            "name": "Variable 23",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_23"
+              }
+            ]
+          },
+          {
+            "id": "VAR_24",
+            "name": "Variable 24",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_24"
+              }
+            ]
+          },
+          {
+            "id": "VAR_25",
+            "name": "Variable 25",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_25"
+              }
+            ]
+          },
+          {
+            "id": "VAR_26",
+            "name": "Variable 26",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_26"
+              }
+            ]
+          },
+          {
+            "id": "VAR_27",
+            "name": "Variable 27",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_27"
+              }
+            ]
+          },
+          {
+            "id": "VAR_28",
+            "name": "Variable 28",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_28"
+              }
+            ]
+          },
+          {
+            "id": "VAR_29",
+            "name": "Variable 29",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_29"
+              }
+            ]
+          },
+          {
+            "id": "VAR_30",
+            "name": "Variable 30",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_30"
+              }
+            ]
+          },
+          {
+            "id": "VAR_31",
+            "name": "Variable 31",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_31"
+              }
+            ]
+          },
+          {
+            "id": "VAR_32",
+            "name": "Variable 32",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_32"
+              }
+            ]
+          },
+          {
+            "id": "VAR_33",
+            "name": "Variable 33",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_33"
+              }
+            ]
+          },
+          {
+            "id": "VAR_34",
+            "name": "Variable 34",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_34"
+              }
+            ]
+          },
+          {
+            "id": "VAR_35",
+            "name": "Variable 35",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_35"
+              }
+            ]
+          },
+          {
+            "id": "VAR_36",
+            "name": "Variable 36",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_36"
+              }
+            ]
+          },
+          {
+            "id": "VAR_37",
+            "name": "Variable 37",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_37"
+              }
+            ]
+          },
+          {
+            "id": "VAR_38",
+            "name": "Variable 38",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_38"
+              }
+            ]
+          },
+          {
+            "id": "VAR_39",
+            "name": "Variable 39",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_39"
+              }
+            ]
+          },
+          {
+            "id": "VAR_40",
+            "name": "Variable 40",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_40"
+              }
+            ]
+          },
+          {
+            "id": "VAR_41",
+            "name": "Variable 41",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_41"
+              }
+            ]
+          },
+          {
+            "id": "VAR_42",
+            "name": "Variable 42",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_42"
+              }
+            ]
+          },
+          {
+            "id": "VAR_43",
+            "name": "Variable 43",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_43"
+              }
+            ]
+          },
+          {
+            "id": "VAR_44",
+            "name": "Variable 44",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_44"
+              }
+            ]
+          },
+          {
+            "id": "VAR_45",
+            "name": "Variable 45",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_45"
+              }
+            ]
+          },
+          {
+            "id": "VAR_46",
+            "name": "Variable 46",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_46"
+              }
+            ]
+          },
+          {
+            "id": "VAR_47",
+            "name": "Variable 47",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_47"
+              }
+            ]
+          },
+          {
+            "id": "VAR_48",
+            "name": "Variable 48",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_48"
+              }
+            ]
+          },
+          {
+            "id": "VAR_49",
+            "name": "Variable 49",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_49"
+              }
+            ]
+          },
+          {
+            "id": "VAR_50",
+            "name": "Variable 50",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_50"
+              }
+            ]
+          },
+          {
+            "id": "VAR_51",
+            "name": "Variable 51",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_51"
+              }
+            ]
+          },
+          {
+            "id": "VAR_52",
+            "name": "Variable 52",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_52"
+              }
+            ]
+          },
+          {
+            "id": "VAR_53",
+            "name": "Variable 53",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_53"
+              }
+            ]
+          },
+          {
+            "id": "VAR_54",
+            "name": "Variable 54",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_54"
+              }
+            ]
+          },
+          {
+            "id": "VAR_55",
+            "name": "Variable 55",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_55"
+              }
+            ]
+          },
+          {
+            "id": "VAR_56",
+            "name": "Variable 56",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_56"
+              }
+            ]
+          },
+          {
+            "id": "VAR_57",
+            "name": "Variable 57",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_57"
+              }
+            ]
+          },
+          {
+            "id": "VAR_58",
+            "name": "Variable 58",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_58"
+              }
+            ]
+          },
+          {
+            "id": "VAR_59",
+            "name": "Variable 59",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_59"
+              }
+            ]
+          },
+          {
+            "id": "VAR_60",
+            "name": "Variable 60 Last received IR",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_60"
+              }
+            ]
+          },
+          {
+            "id": "VAR_61",
+            "name": "Variable 61 Leopard Beep Counter",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_61"
+              }
+            ]
+          },
+          {
+            "id": "VAR_62",
+            "name": "Variable 62 Beep Duration",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_62"
+              }
+            ]
+          },
+          {
+            "id": "VAR_63",
+            "name": "Variable 63 Leopard Screen Number",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_63"
+              }
+            ]
+          },
+          {
+            "id": "VAR_64",
+            "name": "Variable 64",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_64"
+              }
+            ]
+          },
+          {
+            "id": "VAR_65",
+            "name": "Variable 65",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_65"
+              }
+            ]
+          },
+          {
+            "id": "VAR_66",
+            "name": "Variable 66",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_66"
+              }
+            ]
+          },
+          {
+            "id": "VAR_67",
+            "name": "Variable 67",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_67"
+              }
+            ]
+          },
+          {
+            "id": "VAR_68",
+            "name": "Variable 68",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_68"
+              }
+            ]
+          },
+          {
+            "id": "VAR_69",
+            "name": "Variable 69",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_69"
+              }
+            ]
+          },
+          {
+            "id": "VAR_70",
+            "name": "Variable 70",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_70"
+              }
+            ]
+          },
+          {
+            "id": "VAR_71",
+            "name": "Variable 71",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_71"
+              }
+            ]
+          },
+          {
+            "id": "VAR_72",
+            "name": "Variable 72",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_72"
+              }
+            ]
+          },
+          {
+            "id": "VAR_73",
+            "name": "Variable 73",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_73"
+              }
+            ]
+          },
+          {
+            "id": "VAR_74",
+            "name": "Variable 74",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_74"
+              }
+            ]
+          },
+          {
+            "id": "VAR_75",
+            "name": "Variable 75",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_75"
+              }
+            ]
+          },
+          {
+            "id": "VAR_76",
+            "name": "Variable 76",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_76"
+              }
+            ]
+          },
+          {
+            "id": "VAR_77",
+            "name": "Variable 77",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_77"
+              }
+            ]
+          },
+          {
+            "id": "VAR_78",
+            "name": "Variable 78",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_78"
+              }
+            ]
+          },
+          {
+            "id": "VAR_79",
+            "name": "Variable 79",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_79"
+              }
+            ]
+          },
+          {
+            "id": "VAR_80",
+            "name": "Variable 80",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_80"
+              }
+            ]
+          },
+          {
+            "id": "VAR_81",
+            "name": "Variable 81",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_81"
+              }
+            ]
+          },
+          {
+            "id": "VAR_82",
+            "name": "Variable 82",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_82"
+              }
+            ]
+          },
+          {
+            "id": "VAR_83",
+            "name": "Variable 83",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_83"
+              }
+            ]
+          },
+          {
+            "id": "VAR_84",
+            "name": "Variable 84",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_84"
+              }
+            ]
+          },
+          {
+            "id": "VAR_85",
+            "name": "Variable 85",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_85"
+              }
+            ]
+          },
+          {
+            "id": "VAR_86",
+            "name": "Variable 86",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_86"
+              }
+            ]
+          },
+          {
+            "id": "VAR_87",
+            "name": "Variable 87",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_87"
+              }
+            ]
+          },
+          {
+            "id": "VAR_88",
+            "name": "Variable 88",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_88"
+              }
+            ]
+          },
+          {
+            "id": "VAR_89",
+            "name": "Variable 89",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_89"
+              }
+            ]
+          },
+          {
+            "id": "VAR_90",
+            "name": "Variable 90",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_90"
+              }
+            ]
+          },
+          {
+            "id": "VAR_91",
+            "name": "Variable 91",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_91"
+              }
+            ]
+          },
+          {
+            "id": "VAR_92",
+            "name": "Variable 92",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_92"
+              }
+            ]
+          },
+          {
+            "id": "VAR_93",
+            "name": "Variable 93",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_93"
+              }
+            ]
+          },
+          {
+            "id": "VAR_94",
+            "name": "Variable 94",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_94"
+              }
+            ]
+          },
+          {
+            "id": "VAR_95",
+            "name": "Variable 95",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_95"
+              }
+            ]
+          },
+          {
+            "id": "VAR_96",
+            "name": "Variable 96",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_96"
+              }
+            ]
+          },
+          {
+            "id": "VAR_97",
+            "name": "Variable 97",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_97"
+              }
+            ]
+          },
+          {
+            "id": "VAR_98",
+            "name": "Variable 98",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_98"
+              }
+            ]
+          },
+          {
+            "id": "VAR_99",
+            "name": "Variable 99",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_99"
+              }
+            ]
+          },
+          {
+            "id": "VAR_100",
+            "name": "Variable 100",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_100"
+              }
+            ]
+          },
+          {
+            "id": "VAR_101",
+            "name": "Variable 101",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_101"
+              }
+            ]
+          },
+          {
+            "id": "VAR_102",
+            "name": "Variable 102",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_102"
+              }
+            ]
+          },
+          {
+            "id": "VAR_103",
+            "name": "Variable 103",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_103"
+              }
+            ]
+          },
+          {
+            "id": "VAR_104",
+            "name": "Variable 104",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_104"
+              }
+            ]
+          },
+          {
+            "id": "VAR_105",
+            "name": "Variable 105",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_105"
+              }
+            ]
+          },
+          {
+            "id": "VAR_106",
+            "name": "Variable 106",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_106"
+              }
+            ]
+          },
+          {
+            "id": "VAR_107",
+            "name": "Variable 107",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_107"
+              }
+            ]
+          },
+          {
+            "id": "VAR_108",
+            "name": "Variable 108",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_108"
+              }
+            ]
+          },
+          {
+            "id": "VAR_109",
+            "name": "Variable 109",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_109"
+              }
+            ]
+          },
+          {
+            "id": "VAR_110",
+            "name": "Variable 110",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_110"
+              }
+            ]
+          },
+          {
+            "id": "VAR_111",
+            "name": "Variable 111",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_111"
+              }
+            ]
+          },
+          {
+            "id": "VAR_112",
+            "name": "Variable 112",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_112"
+              }
+            ]
+          },
+          {
+            "id": "VAR_113",
+            "name": "Variable 113",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_113"
+              }
+            ]
+          },
+          {
+            "id": "VAR_114",
+            "name": "Variable 114",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_114"
+              }
+            ]
+          },
+          {
+            "id": "VAR_115",
+            "name": "Variable 115",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_115"
+              }
+            ]
+          },
+          {
+            "id": "VAR_116",
+            "name": "Variable 116",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_116"
+              }
+            ]
+          },
+          {
+            "id": "VAR_117",
+            "name": "Variable 117",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_117"
+              }
+            ]
+          },
+          {
+            "id": "VAR_118",
+            "name": "Variable 118",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_118"
+              }
+            ]
+          },
+          {
+            "id": "VAR_119",
+            "name": "Variable 119",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_119"
+              }
+            ]
+          },
+          {
+            "id": "VAR_120",
+            "name": "Variable 120",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_120"
+              }
+            ]
+          },
+          {
+            "id": "VAR_121",
+            "name": "Variable 121",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_121"
+              }
+            ]
+          },
+          {
+            "id": "VAR_122",
+            "name": "Variable 122",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_122"
+              }
+            ]
+          },
+          {
+            "id": "VAR_123",
+            "name": "Variable 123",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_123"
+              }
+            ]
+          },
+          {
+            "id": "VAR_124",
+            "name": "Variable 124",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_124"
+              }
+            ]
+          },
+          {
+            "id": "VAR_125",
+            "name": "Variable 125",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_125"
+              }
+            ]
+          },
+          {
+            "id": "VAR_126",
+            "name": "Variable 126",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_126"
+              }
+            ]
+          },
+          {
+            "id": "VAR_127",
+            "name": "Variable 127",
+            "parameters": [
+              {
+                "id": "",
+                "name": "Value",
+                "editor": "ocelot_var_val",
+                "init": "VAR_127"
               }
             ]
           }
