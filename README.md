@@ -14,6 +14,8 @@ An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation
 * **Variables node**: `Ocelot Variables`, with a **Write Variable** command that writes a 16-bit value into one of the Ocelot's program variables (0-127), and **Get Variables** / **Read Variable** commands that read them back. The variables are also re-read on every short poll and right after every write. Since 1.19.0 each of the 128 variables also has its own property (**Variable 0** to **Variable 127**), so a Program can test any variable directly, and since 1.20.0 each of them has an edit command with the same id. In eisyUI the tiles at the top of the node page are display-only; the edit inputs are in the list of commands at the bottom of the page (see "Changed in 1.20.2"). See "Program variables" below.
 * **Placeholder nodes** for expansion modules of a type this plugin does not support, named `Mod <unit> Type <type number>` (see "Unsupported modules" below). They have no commands.
 
+* You can still interact with unsupported modules (ie: bobcat modules, Speakez) by writing C-Max programs in the Ocelot/Leopard that look for a variable of your choosing to be set to a certain value to trigger an action, or set the input value of a module (such as analog inputs on a SECU16, light sensor Bobcat, etc) to a variable, which can then be read by your IoX program.
+
 Nodes are named `Mod <unit> Relay <n>` / `Mod <unit> Input <n>` / `Mod <unit> IR Zone <n>`, using the 0-based point numbering of C-Max's "Module/Point" convention. You can rename them in the admin console (for example after the room or device each IR zone feeds).
 
 ## Node types (the Type column)
