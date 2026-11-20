@@ -43,8 +43,10 @@ IR_ZONES = 16
 # Highest IR number accepted for SECU-16IR zones, as stated by the installer. The
 # protocol itself carries a 16-bit number.
 IR_NUMBER_MAX = 1023
-# Highest resident IR number, per the protocol document ("IRnumber (0 to 39)").
-RESIDENT_IR_MAX = 39
+# Highest resident IR number accepted, as stated by the installer: the same 0-1023 as the
+# SECU-16IR zones. The protocol document gives "IRnumber (0 to 39)" for Send Resident IR, so
+# this limit has not been checked against the document; the frame carries a 16-bit number.
+RESIDENT_IR_MAX = IR_NUMBER_MAX
 # Write CPUXA Variable Data: data is a 16-bit value, LSB first. The variable number
 # range 0-127 is as stated by the installer (versions up to 1.8.1 used 0-63, which is
 # what the March 2000 protocol document lists: 0-60 regular, 61 Leopard beep counter,

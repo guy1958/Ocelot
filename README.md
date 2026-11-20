@@ -10,7 +10,7 @@ An IoX plugin for the Applied Digital **Ocelot** and **Leopard** home-automation
 * **Relay nodes** (On/Off) for every relay on SECU-16 and RLY08-XA expansion modules (node types *SECU16 Relay* and *RLY08XA Relay*). When the Ocelot acknowledges an On/Off command the new state is sent to IoX immediately and stays shown (see "Changed in 1.15.0"); the plugin then re-reads the latched inputs and relays of the SECU-16 and SECU-16I modules (see "Changed in 1.13.0").
 * **Input nodes** (On/Off) for every digital input bit on SECU-16 and SECU-16I modules (node types *SECU16 Input* and *SECU16I Input*). They also send DON/DOF on change (named *On* and *Off* in the Program editor) so Programs can trigger on them.
 * **IR zone nodes**: 16 per SECU-16IR module (node type *SECU16IR Zone*), each with a **Send IR** command that takes an *IR Number* (0-1023). See "IR output" below.
-* **Resident IR node**: `Ocelot Resident IR`, with a **Send Resident IR** command that takes an *IR Number* (0-1023) and makes the Ocelot itself transmit it. See "IR output" below.
+* **Resident IR node**: `Ocelot Resident IR`, with a **Send Resident IR** command that takes an *IR Number* (0-1023, same as the zone nodes since 1.21.0) and makes the Ocelot itself transmit it. See "IR output" below.
 * **Variables node**: `Ocelot Variables`, with a **Write Variable** command that writes a 16-bit value into one of the Ocelot's program variables (0-127), and **Get Variables** / **Read Variable** commands that read them back. The variables are also re-read on every short poll and right after every write. Since 1.19.0 each of the 128 variables also has its own property (**Variable 0** to **Variable 127**), so a Program can test any variable directly, and since 1.20.0 each of them has an edit command with the same id. In eisyUI the tiles at the top of the node page are display-only; the edit inputs are in the list of commands at the bottom of the page (see "Changed in 1.20.2"). See "Program variables" below.
 * **Placeholder nodes** for expansion modules of a type this plugin does not support, named `Mod <unit> Type <type number>` (see "Unsupported modules" below). They have no commands.
 
@@ -54,6 +54,14 @@ The plugin asks the Ocelot for the type code of every expansion module (Get Unit
 * The notice banner "Ignored expansion modules of an unsupported type", shown by versions up to 1.13.0, no longer exists because these modules are no longer ignored. The log records the units and type codes found.
 * A placeholder is only removed while the plugin is running and notices the change. One that was made in an earlier run and whose module is gone is not known to the plugin after a restart and stays until you delete it yourself.
 * The new node type is part of the node profile, so it appears in the admin console once the plugin has restarted and re-sent its profile.
+
+## Changed in 1.21.0
+
+* **Send Resident IR now accepts IR numbers 0 to 1023**, the same range as **Send IR** on the SECU-16IR zone nodes. It was 0-39. The new range was given by the installer. The frame already carries a 16-bit number (least significant byte first, as for Send IR), so only the limit changed.
+* **What the sources say.** The protocol document gives "IRnumber (0 to 39)" for this command, which was the old limit. Applied Digital's Ocelot manual (which speaks of IR numbers up to 1023) and a HomeSeer forum post (which says an Ocelot or Leopard has 1024 IR locations, 0-1023, that can be sent through its own emitter or through a SECU-16IR port) both fit the wider range. They were found by a web search; they are not the protocol document, and this plugin has not reconciled them with its 0-39. So the new limit is consistent with those two sources but has **not** been checked against the protocol document or on hardware.
+* **Where the limit is:** the *IR Number* editor of the `Ocelot Resident IR` node (the **Send Resident IR** parameter and the **Last IR Number** property) now has the range 0-1023, so the admin console and Programs accept those numbers. It is part of the node profile, so it appears once the plugin has restarted and re-sent its profile. The plugin itself also refuses a number outside 0-1023 (logged, **Last Send Result** shows "Not Acknowledged", nothing is sent to the Ocelot).
+* **Nothing else changes.** Send IR on the zone nodes, the Variables node and the module nodes are as before.
+* Covered by hardware-free tests (frames for 40, 256 and 1023, and refusals at -1 and 1024); not yet checked on the installer's system.
 
 ## Changed in 1.20.2
 
@@ -229,7 +237,7 @@ The SECU-16IR adds 16 zoned infrared outputs; it has no inputs or relays. Each z
 
 The `Ocelot Resident IR` node's **Send Resident IR** command sends the protocol's *Send Resident IR* (command 90): the Ocelot transmits the IR command stored under that number in its own memory. It does not use any SECU-16IR.
 
-* The protocol document gives resident IR numbers as 0-39 ("IRnumber (0 to 39)"), so that is the limit here. This is deliberately different from the SECU-16IR zone nodes' 0-1023.
+* IR numbers 0-1023 are accepted since 1.21.0, the same as the SECU-16IR zone nodes, as stated by the installer. Before 1.21.0 the limit was 0-39, which is what the protocol document gives ("IRnumber (0 to 39)"). Applied Digital's Ocelot manual and a HomeSeer forum post describe IR numbers up to 1023 on the Ocelot, which fits the wider range (see "Changed in 1.21.0"), but the new limit has not been checked against the protocol document or on hardware. The frame carries the number as 16 bits, least significant byte first.
 * The node is created whenever the Ocelot answers, whether or not a SECU-16IR is installed.
 
 ## Program variables
@@ -300,7 +308,7 @@ Tested against a real Ocelot through a serial-to-Ethernet adapter (`socket://hos
 * **Per-module node types (1.17.0)**: after the restart PG3 held 8 SECU16 Input, 8 SECU16 Relay and 16 SECU16I Input nodes, and the installer confirmed the Type column looks right.
 * **The Ocelot on the installer's system** reports unit 2 as type 12 (SECU-16I) and unit 4 as type 11 (SECU-16), so the plugin has now created SECU-16I input nodes on real hardware; whether their input states are right has not been checked here (the README had no SECU-16I to test before).
 
-Not yet confirmed on hardware: **a write made through a variable's edit input reaching the Ocelot (the inputs are there in eisyUI; no write through them was reported; the admin console and UD Mobile were not checked)**; **using a per-variable property in a Program condition (1.19.0)**; **removing the Discover command (1.18.0)**; **placeholder nodes for unsupported module types (1.14.0)**; the SECU-16I input layout; IR sending (remote and resident); reading the variables on every short poll (1.10.0) and the read straight after a variable write (1.11.0); these are covered by hardware-free tests only. The serial settings in use were those of the adapter, which were not recorded here.
+Not yet confirmed on hardware: **a write made through a variable's edit input reaching the Ocelot (the inputs are there in eisyUI; no write through them was reported; the admin console and UD Mobile were not checked)**; **using a per-variable property in a Program condition (1.19.0)**; **removing the Discover command (1.18.0)**; **placeholder nodes for unsupported module types (1.14.0)**; the SECU-16I input layout; IR sending (remote and resident, including resident numbers above 39 since 1.21.0); reading the variables on every short poll (1.10.0) and the read straight after a variable write (1.11.0); these are covered by hardware-free tests only. The serial settings in use were those of the adapter, which were not recorded here.
 
 ## Known gaps: please read
 

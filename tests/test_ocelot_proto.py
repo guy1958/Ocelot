@@ -144,9 +144,18 @@ class ProtoTests(unittest.TestCase):
         self.assertEqual(op.build_resident_ir(0), bytes([200, 90, 0, 0, 0, 0, 0, (200 + 90) & 255]))
         self.assertEqual(op.build_resident_ir(5), bytes([200, 90, 5, 0, 0, 0, 0, (200 + 90 + 5) & 255]))
         self.assertEqual(op.build_resident_ir(39), bytes([200, 90, 39, 0, 0, 0, 0, (200 + 90 + 39) & 255]))
+        # Above the old 0-39 limit: LSB/MSB split. 40 is the first number the old limit refused.
+        self.assertEqual(op.build_resident_ir(40), bytes([200, 90, 40, 0, 0, 0, 0, (200 + 90 + 40) & 255]))
+        self.assertEqual(op.build_resident_ir(256), bytes([200, 90, 0, 1, 0, 0, 0, (200 + 90 + 1) & 255]))
+        # Top of the accepted range: 1023 = MSB 3, LSB 255
+        self.assertEqual(op.build_resident_ir(1023), bytes([200, 90, 255, 3, 0, 0, 0, (200 + 90 + 255 + 3) & 255]))
+
+    def test_resident_ir_limit_matches_secu16ir(self):
+        self.assertEqual(op.RESIDENT_IR_MAX, 1023)
+        self.assertEqual(op.RESIDENT_IR_MAX, op.IR_NUMBER_MAX)
 
     def test_build_resident_ir_range_checks(self):
-        for n in (-1, 40, 1023, 65535):
+        for n in (-1, 1024, 65535):
             with self.assertRaises(ValueError, msg=str(n)):
                 op.build_resident_ir(n)
 
@@ -409,11 +418,15 @@ class ProtoTests(unittest.TestCase):
                 op.parse_ir_number(cmd)
 
     def test_parse_ir_number_resident_limit(self):
+        # Send Resident IR accepts 0-1023, the same as the SECU-16IR zone nodes (it was 0-39 before 1.21.0).
         self.assertEqual(op.parse_ir_number({'query': {'IRNUM.uom108': '39'}}, op.RESIDENT_IR_MAX), 39)
-        with self.assertRaises(ValueError):
-            op.parse_ir_number({'query': {'IRNUM': 40}}, op.RESIDENT_IR_MAX)
-        # the zone nodes keep the wider limit
-        self.assertEqual(op.parse_ir_number({'query': {'IRNUM': 40}}), 40)
+        self.assertEqual(op.parse_ir_number({'query': {'IRNUM': 40}}, op.RESIDENT_IR_MAX), 40)
+        self.assertEqual(op.parse_ir_number({'query': {'IRNUM': 1023}}, op.RESIDENT_IR_MAX), 1023)
+        for n in (1024, -1):
+            with self.assertRaises(ValueError, msg=str(n)):
+                op.parse_ir_number({'query': {'IRNUM': n}}, op.RESIDENT_IR_MAX)
+        # both kinds of IR output now share one limit
+        self.assertEqual(op.parse_ir_number({'query': {'IRNUM': 1023}}), 1023)
 
     def test_realtime_io_reads_256_bytes(self):
         payload = bytes(range(256))
